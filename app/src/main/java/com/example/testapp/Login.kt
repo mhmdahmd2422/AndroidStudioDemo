@@ -38,12 +38,16 @@ class Login : AppCompatActivity() {
         loginbtn.setOnClickListener {
             val email = edtEmail.text.toString()
             val password = edtpwd.text.toString()
-            login(email, password)
+            if (isValidEmail(email) && isValidPassword(password)) {
+                login(email, password)
+            } else {
+                Toast.makeText(this@Login, "Invalid Username/Password Syntax!", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
 
-    private fun login(email: String, password: String) {
+    fun login(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -60,5 +64,15 @@ class Login : AppCompatActivity() {
 
     fun isValidEmail(target: CharSequence?): Boolean {
         return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches()
+    }
+
+    fun isValidPassword(password: String): Boolean {
+        if (password.length < 8) return false
+        if (password.filter { it.isDigit() }.firstOrNull() == null) return false
+        if (password.filter { it.isLetter() }.filter { it.isUpperCase() }.firstOrNull() == null) return false
+        if (password.filter { it.isLetter() }.filter { it.isLowerCase() }.firstOrNull() == null) return false
+        if (password.filter { !it.isLetterOrDigit() }.firstOrNull() == null) return false
+
+        return true
     }
 }

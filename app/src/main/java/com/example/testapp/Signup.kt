@@ -3,6 +3,8 @@ package com.example.testapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
+import android.text.TextUtils
+import android.util.Patterns
 import android.widget.EditText
 import android.widget.Button
 import android.widget.Toast
@@ -35,7 +37,11 @@ class SignUp : AppCompatActivity() {
             val name = edtName.text.toString()
             val email = edtEmail.text.toString()
             val password = edtPassword.text.toString()
-            signUp(name,email, password)
+            if(isValidEmail(email) && isValidPassword(password)) {
+                signUp(name, email, password)
+            }else{
+                Toast.makeText(this@SignUp,"Invalid Syntax!", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -52,7 +58,7 @@ class SignUp : AppCompatActivity() {
 
                 } else {
                     // If sign in fails, display a message to the user.
-                    Toast.makeText(this@SignUp,"some error occured", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SignUp,"Cannot Connet to Server", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -61,5 +67,19 @@ class SignUp : AppCompatActivity() {
         dbref = FirebaseDatabase.getInstance().getReference()
 
         dbref.child("User").child(uid).setValue(User(name, email, uid))
+    }
+
+    fun isValidEmail(target: CharSequence?): Boolean {
+        return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches()
+    }
+
+    fun isValidPassword(password: String): Boolean {
+        if (password.length < 8) return false
+        if (password.filter { it.isDigit() }.firstOrNull() == null) return false
+        if (password.filter { it.isLetter() }.filter { it.isUpperCase() }.firstOrNull() == null) return false
+        if (password.filter { it.isLetter() }.filter { it.isLowerCase() }.firstOrNull() == null) return false
+        if (password.filter { !it.isLetterOrDigit() }.firstOrNull() == null) return false
+
+        return true
     }
 }
