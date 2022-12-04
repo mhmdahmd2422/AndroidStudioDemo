@@ -20,8 +20,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="351dp"
         android:layout_centerHorizontal="true"
-        android:text="Email"
-        android:textSize="15dp"/>
+        android:text="Nickname"
+        android:textSize="15dp"
+        android:id = "@+id/namelabel"/>
 
     <EditText
         android:layout_width="250dp"
@@ -30,13 +31,37 @@
         android:layout_below="@+id/loginicon"
         android:layout_marginTop="50dp"
         android:background="@drawable/edit_bg"
-        android:id = "@+id/emailfield"
+        android:id = "@+id/namefield"
+        android:maxLines="1"
+        android:paddingHorizontal="8dp"
         />
 
     <TextView
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="453dp"
+        android:layout_marginTop="445dp"
+        android:layout_centerHorizontal="true"
+        android:text="Email"
+        android:textSize="15dp"
+        android:id= "@+id/emaillabel"/>
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/emaillabel"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/edit_bg"
+        android:id = "@+id/emailfield"
+        android:maxLines="1"
+        android:paddingHorizontal="8dp"
+        />
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/emailfield"
+        android:layout_marginTop="24dp"
         android:layout_centerHorizontal="true"
         android:text="Password"
         android:textSize="15dp"
@@ -50,6 +75,8 @@
         android:layout_marginTop="50dp"
         android:background="@drawable/edit_bg"
         android:id = "@+id/pwdfield"
+        android:maxLines="1"
+        android:paddingHorizontal="8dp"
         />
 
 
