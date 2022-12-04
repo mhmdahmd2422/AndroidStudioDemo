@@ -8,9 +8,9 @@
     tools:ignore="MissingDefaultResource">
     
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/chaticon"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/smartphone"
         android:layout_centerInParent="true"
         android:id = "@+id/chaticon"
         />
